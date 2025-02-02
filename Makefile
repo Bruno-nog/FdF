@@ -6,7 +6,7 @@
 #    By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/02/01 16:23:53 by brunogue          #+#    #+#              #
-#    Updated: 2025/02/01 17:39:05 by brunogue         ###   ########.fr        #
+#    Updated: 2025/02/02 16:25:15 by brunogue         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ CFLAGS = -Wall -Werror -Wextra
 LIBFT = lib/libft.a
 MLX = ../minilibx-linux
 
-SRC = srcs/main.c srcs/fdf.c
+SRC = srcs/main.c srcs/fdf.c srcs/close.c
 OBJ = $(SRC:.c=.o)
 
 all: $(NAME)

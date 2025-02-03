@@ -10,7 +10,7 @@ void	free_map(int **map, int rows)
 }
 
 int	handle_close(void *param)
-{
+{ 
 	t_data	*data;
 
 	data = (t_data *)param;

@@ -1,37 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   close.c                                            :+:      :+:    :+:   */
+/*   map_structs.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/06 18:19:54 by brunogue          #+#    #+#             */
-/*   Updated: 2025/02/11 19:24:50 by brunogue         ###   ########.fr       */
+/*   Created: 2025/02/11 19:26:12 by brunogue          #+#    #+#             */
+/*   Updated: 2025/02/11 19:36:18 by brunogue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/fdf.h"
+#ifndef MAP_STRUCTS_H
+# define MAP_STRUCTS_H
 
-void	free_map(int **map, int rows)
+# include "fdf.h"
+
+typedef struct s_coord
 {
-	int	i;
+	int	x;
+	int	y;
+}	t_coord;
 
-	i = 0;
-	while (i < rows)
-	{
-		free(map[i]);
-		i++;
-	}
-	free(map);
-}
-
-int	handle_close(void *param)
+typedef struct s_point
 {
+	int	x;
+	int	y;
+}	t_point;
+
+typedef struct s_draw
+{
+	int		row;
+	int		col;
 	t_data	*data;
+	t_coord	p1;
+	t_coord	p2;
+	t_coord	world1;
+	t_coord	world2;
+	t_img	img;
+}	t_draw;
 
-	data = (t_data *)param;
-	free_map(data->map, data->rows);
-	mlx_destroy_window(data->mlx_ptr, data->win_ptr);
-	exit(0);
-	return (0);
-}
+#endif

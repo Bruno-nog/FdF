@@ -1,37 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   close.c                                            :+:      :+:    :+:   */
+/*   draw_structs.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/06 18:19:54 by brunogue          #+#    #+#             */
-/*   Updated: 2025/02/11 19:24:50 by brunogue         ###   ########.fr       */
+/*   Created: 2025/02/11 19:25:53 by brunogue          #+#    #+#             */
+/*   Updated: 2025/02/11 19:36:06 by brunogue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/fdf.h"
+#ifndef DRAW_STRUCTS_H
+# define DRAW_STRUCTS_H
 
-void	free_map(int **map, int rows)
+# include "fdf.h"
+
+typedef struct s_img
 {
-	int	i;
+	void	*img;
+	char	*addr;
+	int		bpp;
+	int		line_length;
+	int		endian;
+}	t_img;
 
-	i = 0;
-	while (i < rows)
-	{
-		free(map[i]);
-		i++;
-	}
-	free(map);
-}
-
-int	handle_close(void *param)
+typedef struct s_pixel
 {
-	t_data	*data;
+	char	*addr;
+	int		line_length;
+	int		bpp;
+}	t_pixel;
 
-	data = (t_data *)param;
-	free_map(data->map, data->rows);
-	mlx_destroy_window(data->mlx_ptr, data->win_ptr);
-	exit(0);
-	return (0);
-}
+typedef struct s_line
+{
+	int	x1;
+	int	y1;
+	int	x2;
+	int	y2;
+}	t_line;
+
+#endif

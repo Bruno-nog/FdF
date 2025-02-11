@@ -1,37 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   close.c                                            :+:      :+:    :+:   */
+/*   data_structs.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/06 18:19:54 by brunogue          #+#    #+#             */
-/*   Updated: 2025/02/11 19:24:50 by brunogue         ###   ########.fr       */
+/*   Created: 2025/02/11 19:25:28 by brunogue          #+#    #+#             */
+/*   Updated: 2025/02/11 19:36:16 by brunogue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/fdf.h"
+#ifndef DATA_STRUCTS_H
+# define DATA_STRUCTS_H
 
-void	free_map(int **map, int rows)
+# include "fdf.h"
+
+typedef struct s_data
 {
-	int	i;
+	void	*mlx_ptr;
+	void	*win_ptr;
+	int		**map;
+	int		rows;
+	int		cols;
+	float	zoom;
+	int		zoom_in;
+	int		zoom_out;
+	int		offset_x;
+	int		offset_y;
+	int		pan_offset_x;
+	int		pan_offset_y;
+}	t_data;
 
-	i = 0;
-	while (i < rows)
-	{
-		free(map[i]);
-		i++;
-	}
-	free(map);
-}
-
-int	handle_close(void *param)
+typedef struct s_bound
 {
-	t_data	*data;
+	int	min_x;
+	int	min_y;
+	int	max_x;
+	int	max_y;
+}	t_bound;
 
-	data = (t_data *)param;
-	free_map(data->map, data->rows);
-	mlx_destroy_window(data->mlx_ptr, data->win_ptr);
-	exit(0);
-	return (0);
-}
+#endif

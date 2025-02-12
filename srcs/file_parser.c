@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 19:19:05 by brunogue          #+#    #+#             */
-/*   Updated: 2025/02/11 19:25:04 by brunogue         ###   ########.fr       */
+/*   Updated: 2025/02/12 16:55:48 by brunogue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,13 +51,13 @@ int	**allocate_map(int rows, int cols)
 	int	**map;
 	int	i;
 
-	i = 0;
 	map = malloc(sizeof(int *) * rows);
 	if (!map)
 		return (NULL);
+	i = 0;
 	while (i < rows)
 	{
-		map[i] = malloc(sizeof(int) * cols);
+		map[i] = calloc(cols, sizeof(int));
 		if (!map[i])
 		{
 			while (--i >= 0)

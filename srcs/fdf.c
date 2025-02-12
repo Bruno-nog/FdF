@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/01 16:19:50 by brunogue          #+#    #+#             */
-/*   Updated: 2025/02/11 19:24:58 by brunogue         ###   ########.fr       */
+/*   Updated: 2025/02/12 17:38:57 by brunogue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,24 +56,16 @@ void	draw_line(t_line line, void *mlx_ptr, void *win_ptr)
 static void	update_bounds(t_bound *bound, int wx, int wy)
 {
 	if (wx < bound->min_x)
-	{
 		bound->min_x = wx;
-	}
 	if (wx > bound->max_x)
-	{
 		bound->max_x = wx;
-	}
 	if (wy < bound->min_y)
-	{
 		bound->min_y = wy;
-	}
 	if (wy > bound->max_y)
-	{
 		bound->max_y = wy;
-	}
 }
 
-void	calculate_projected_bound(t_data *data, t_bound *bound, float zoom)
+void	calculate_projected_bound(t_data *data, t_bound *bound,float zoom)
 {
 	int	y;
 	int	x;

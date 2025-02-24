@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/01 17:31:44 by brunogue          #+#    #+#             */
-/*   Updated: 2025/02/11 19:25:08 by brunogue         ###   ########.fr       */
+/*   Updated: 2025/02/20 16:06:19 by brunogue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,8 @@ int	main(int argc, char **argv)
 	float		width_ratio;
 	float		height_ratio;
 
-	verify_argc_and_readmap (argc, argv, &data);
+	if (verify_argc_and_readmap (argc, argv, &data) == 1)
+		return (1);
 	data.mlx_ptr = mlx_init();
 	data.win_ptr = mlx_new_window(data.mlx_ptr, WIN_W, WIN_H, "FdF");
 	assignment_zoom_offset (&data);

@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 12:09:28 by brunogue          #+#    #+#             */
-/*   Updated: 2025/02/11 19:24:53 by brunogue         ###   ########.fr       */
+/*   Updated: 2025/02/20 18:41:01 by brunogue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,20 +55,20 @@ int	handle_key_press(int keycode, void *param)
 	t_data	*data;
 
 	data = (t_data *)param;
-	if (keycode == 65307) // ESC
+	if (keycode == 65307)
 		handle_close(data);
-	if (keycode == 65361) // seta esquerda
+	if (keycode == 65361)
 		data->offset_x += 10;
-	if (keycode == 65363) // seta direita
+	if (keycode == 65363)
 		data->offset_x -= 10;
-	if (keycode == 65362) // seta cima
+	if (keycode == 65362)
 		data->offset_y += 10;
-	if (keycode == 65364) // seta baixo
+	if (keycode == 65364)
 		data->offset_y -= 10;
-	if (keycode == 61 || keycode == 65451) // "+"
-		data->zoom_in = 1; // Mantém pressionado
-	if (keycode == 45 || keycode == 65453) // "-"
-		data->zoom_out = 1; // Mantém pressionado
+	if (keycode == 61 || keycode == 65451)
+		data->zoom_in = 1;
+	if (keycode == 45 || keycode == 65453)
+		data->zoom_out = 1;
 	draw_map(data);
 	return (0);
 }
@@ -78,7 +78,6 @@ int	handle_key_release(int keycode, void *param)
 	t_data	*data;
 
 	data = (t_data *)param;
-	//Libera apenas quando a tecla específica for solta
 	if (keycode == 61 || keycode == 65451)
 		data->zoom_in = 0;
 	else if (keycode == 45 || keycode == 65453)

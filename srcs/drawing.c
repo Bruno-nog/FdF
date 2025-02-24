@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 16:03:33 by brunogue          #+#    #+#             */
-/*   Updated: 2025/02/11 19:37:21 by brunogue         ###   ########.fr       */
+/*   Updated: 2025/02/24 20:43:25 by brunogue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void	draw_line_img(t_point p1, t_point p2, t_img *img)
 	calculate_line_vars(&line, &vars);
 	while (1)
 	{
-		my_mlx_pixel_put(&pixel, x, y, 0xFFFFFF);
+		my_mlx_pixel_put(&pixel, x, y, 0x23d4de);
 		if (x == line.x2 && y == line.y2)
 			break ;
 		vars.e2 = 2 * vars.err;

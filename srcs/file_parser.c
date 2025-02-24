@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 19:19:05 by brunogue          #+#    #+#             */
-/*   Updated: 2025/02/12 16:55:48 by brunogue         ###   ########.fr       */
+/*   Updated: 2025/02/24 20:48:31 by brunogue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,106 +15,89 @@
 int	count_columns(char *line)
 {
 	int		count;
-	char	*copy;
+	char	*temp;
 	char	*num;
 
 	count = 0;
-	copy = strdup(line);
-	num = strtok(copy, " ");
+	temp = ft_strdup(line);
+	num = ft_strtok(temp, " ");
 	while (num)
 	{
 		count++;
-		num = strtok(NULL, " ");
+		num = ft_strtok(NULL, " ");
 	}
-	free(copy);
+	free(temp);
 	return (count);
 }
 
-int	count_rows(FILE *file)
+int	count_rows(int *fd, char *filename)
 {
 	char	*line;
-	size_t	len;
 	int		rows;
 
-	line = NULL;
-	len = 0;
 	rows = 0;
-	while (getline(&line, &len, file) != -1)
+	line = get_next_line(*fd);
+	while (line)
+	{
 		rows++;
-	free(line);
-	rewind(file);
+		free(line);
+		line = get_next_line(*fd);
+	}
+	close(*fd);
+	*fd = open(filename, O_RDONLY);
 	return (rows);
 }
 
-int	**allocate_map(int rows, int cols)
-{
-	int	**map;
-	int	i;
-
-	map = malloc(sizeof(int *) * rows);
-	if (!map)
-		return (NULL);
-	i = 0;
-	while (i < rows)
-	{
-		map[i] = calloc(cols, sizeof(int));
-		if (!map[i])
-		{
-			while (--i >= 0)
-				free(map[i]);
-			free(map);
-			return (NULL);
-		}
-		i++;
-	}
-	return (map);
-}
-
-void	fill_map(FILE *file, int **map, int x, int cols)
+static int	read_and_count_columns(int fd, int *cols)
 {
 	char	*line;
-	char	*num;
-	size_t	len;
-	int		y;
 
-	line = NULL;
-	len = 0;
-	y = 0;
-	while (getline(&line, &len, file) != -1)
-	{
-		x = 0;
-		num = strtok(line, " ");
-		while (num && x < cols)
-		{
-			map[y][x++] = atoi(num);
-			num = strtok(NULL, " ");
-		}
-		y++;
-	}
+	line = get_next_line(fd);
+	if (!line)
+		return (0);
+	*cols = count_columns(line);
 	free(line);
+	return (1);
+}
+
+static int	get_dimensions(char *filename, int *rows, int *cols)
+{
+	int	fd;
+
+	fd = open(filename, O_RDONLY);
+	if (fd < 0)
+		return (-1);
+	*rows = count_rows(&fd, filename);
+	if (!read_and_count_columns(fd, cols))
+	{
+		close(fd);
+		return (-1);
+	}
+	close(fd);
+	fd = open(filename, O_RDONLY);
+	if (fd < 0)
+		return (-1);
+	close(fd);
+	return (0);
 }
 
 int	**read_map(char *filename, int *rows, int *cols)
 {
-	char	*line;
-	size_t	len;
 	int		**map;
-	FILE	*file;
+	int		fd;
 
-	file = fopen(filename, "r");
-	if (!file)
+	if (get_dimensions(filename, rows, cols) < 0)
 		return (NULL);
-	*rows = count_rows(file);
-	line = NULL;
-	len = 0;
-	getline(&line, &len, file);
-	*cols = count_columns(line);
-	rewind(file);
+	fd = open(filename, O_RDONLY);
+	if (fd < 0)
+		return (NULL);
 	map = allocate_map(*rows, *cols);
 	if (!map)
+	{
+		close(fd);
 		return (NULL);
-	fill_map(file, map, *rows, *cols);
-	free(line);
-	fclose(file);
+	}
+	fill_map(fd, map, *rows, *cols);
+	close(fd);
 	return (map);
 }

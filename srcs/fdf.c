@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/01 16:19:50 by brunogue          #+#    #+#             */
-/*   Updated: 2025/02/12 17:38:57 by brunogue         ###   ########.fr       */
+/*   Updated: 2025/02/24 20:41:02 by brunogue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ static void	update_bounds(t_bound *bound, int wx, int wy)
 		bound->max_y = wy;
 }
 
-void	calculate_projected_bound(t_data *data, t_bound *bound,float zoom)
+void	calculate_projected_bound(t_data *data, t_bound *bound, float zoom)
 {
 	int	y;
 	int	x;
@@ -83,11 +83,35 @@ void	calculate_projected_bound(t_data *data, t_bound *bound,float zoom)
 		while (x < data->cols)
 		{
 			wx = x * 20 * zoom;
-			wy = y * 20 * zoom - data->map[y][x] * 2 * zoom;
+			wy = y * 20 * zoom;
 			projection_iso(&wx, &wy, data->map[y][x]);
 			update_bounds(bound, wx, wy);
 			x++;
 		}
 		y++;
 	}
+}
+
+int	**allocate_map(int rows, int cols)
+{
+	int	**map;
+	int	i;
+
+	map = malloc(sizeof(int *) * rows);
+	if (!map)
+		return (NULL);
+	i = 0;
+	while (i < rows)
+	{
+		map[i] = calloc(cols, sizeof(int));
+		if (!map[i])
+		{
+			while (--i >= 0)
+				free(map[i]);
+			free(map);
+			return (NULL);
+		}
+		i++;
+	}
+	return (map);
 }

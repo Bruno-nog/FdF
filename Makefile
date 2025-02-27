@@ -6,12 +6,12 @@
 #    By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/02/01 16:23:53 by brunogue          #+#    #+#              #
-#    Updated: 2025/02/24 19:57:56 by brunogue         ###   ########.fr        #
+#    Updated: 2025/02/25 12:34:36 by brunogue         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = fdf
-CC = gcc
+CC = cc
 CFLAGS = -Wall -Werror -Wextra
 LIBFT = lib/libft.a
 

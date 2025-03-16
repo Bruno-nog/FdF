@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 13:33:13 by brunogue          #+#    #+#             */
-/*   Updated: 2025/02/27 17:26:30 by brunogue         ###   ########.fr       */
+/*   Updated: 2025/03/16 12:56:43 by brunogue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 
 # include <unistd.h>
 # include <math.h>
-# include <mlx.h>
-# include "../libft/libft.h"
+# include "../minilibx-linux/mlx.h"
+# include "../lib/libft.h"
 //HEADERS 
 # include "data_structs.h"
 # include "draw_structs.h"
